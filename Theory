@@ -1,0 +1,52 @@
+For Face Detection
+Viola Jones algorithm :
+It is the most powerful algorithm for computer vision ( to date 2017 ) developed in 2001
+It is used for real time face detection
+It has two stages
+1. Traning 
+2. Detection
+
+Detection 
+The rgb image is converted to grayscale and the algorithm starts to look for various 
+features ( like nose, eye brows, lips ... etc)
+It does this with f a sub-window that sweeps across the images looking at various features.
+(The size of the sub-window(box) may vary)
+
+Haar-lIke features 
+-Edge features (Eye Brows)
+-Line features (Lips)
+-Four rectangle Features
+
+These are the features which help to identify differet part of the faces based on 
+cahge is intensity of pixel changes with in the image
+
+Threshold is set on the basis of the value given by B-W = value (Black-White (0.568-0.166)) 
+where 0-100% white 
+      1-100% black 
+For line feature both min and max threshold need to be set
+Say for a nose B-W = 0.402 
+so we can set ( If T>0.3 identify the feature as a nose 
+else the feature doesnot identify a nose)
+
+Integral Feature ( A hack for haar like features to make the process simples)
+To find B and W value we have to find the avg value for individual pixels which can be heavy for larger images so we 
+use this method which brings the no of need points to only four values even htough there are 1000 of indiviual pixel values
+For more :- check journal for 02-26-2018
+
+Traning classifiers
+- The algorithm works by resizing an image to 24*24 px
+and scaling the individual features.
+We train by using 1000 of face and non- face (to solve the problem of false positive)
+
+Adaptive boositve 
+this is done to make traning more efficient as the total no of features with in a face can be 
+180,000+ even in 24*24 px image
+So 
+F(x) (Strong classifier) = a1f1(x)(weak classifer) + a2f2(x)+ ....
+where the strong classifer is the toatl sum of many weak calssifiers put together
+F(x)= Strong feature (60%) + The feature that compliments the strong feature + ... fixing weakneasses with in a strong feature
+
+Cascading (A hack for adaptive boosting to make the algorithm efficient) 
+It rejects the other features in sequences (complimenting features) when a ceratin feature is no found
+It is risky as it is based on a single feature to reject all the other features 
+
