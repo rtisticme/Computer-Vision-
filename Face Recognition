@@ -1,0 +1,44 @@
+#Face Recognition
+
+#Importing library
+import cv2
+
+#loading the cascade
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
+
+scale_factor_face = 1.3
+scale_factor_eye = 1.1
+#5 = features to detect 
+#function for detection 
+def detect(gray, frame) :
+    faces = face_cascade.detectMultiScale(gray, scale_factor_face, 5)
+    #detect grayscale image using the cascade, scale it and look for 5 cascading
+    #features 
+    for (x, y, w, h) in faces: #loop value form faces to x,y,w,h
+        cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0), 4) #4=width of the box
+        #darw a rectangle foe the face starting at x, y and add to width and
+        #height value of the face
+        print('Number of faces found {}', format(len(faces)))
+        roi_gray = gray[y:y+h, x:x+w] #put all the values of the face to roi_gray 
+        roi_frame = frame[y:y+h, x:x+w] #put vale from captured video to roi_color
+        eyes = eye_cascade.detectMultiScale(roi_gray, scale_factor_eye, 3)
+        #using eye cascade look for eye within the rectangular face box
+        #scale it and look for 3 cascading features 
+        for (ex, ey, ew, eh) in eyes: #put the values from eyes to ex,ey,ew,eh
+            cv2.rectangle(roi_frame, (ex,ey), (ex+ew, ey+eh), (0,255,0), 2)
+        #draw a rectangle for the eye 
+    return frame 
+
+#using the webcam 
+video_capture = cv2.VideoCapture(0)
+while True:
+    ret, frame = video_capture.read() #we capture a video
+    #ret=return 
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) #convert the frames to gray scale
+    canvas = detect(gray, frame) #send the grayscale frame to fuction 
+    cv2.imshow('Video' , canvas) #show the video 
+    if cv2.waitKey(1) & 0xFF == ord('q'): #open video until q is pressed 
+        break
+video_capture.release()
+cv2.destroyAllWindows()
