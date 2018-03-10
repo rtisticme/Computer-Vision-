@@ -14,7 +14,7 @@ cv2.destroyAllWindows() #destory all python window after closing
 #medain blur- it is used to remove noise from an image
 noise = cv2.imread ('noise.png', 0) #to read a imaage and convert to grayscale
 
-kernal = 5 #3x3 matrix
+kernal = 5 #strength
 
 median = cv2.medianBlur(noise, kernal)
 
