@@ -1,0 +1,20 @@
+import numpy as np #to help with multidimensional array within the picture 
+import cv2
+
+pic = cv2.imread ('rt.jpg') #to read a imaage from the folder
+cols=pic.shape[1] #row and colums define 
+rows=pic.shape[0]
+center = (cols/2, rows/2) #to rotate from the centre of the image
+angle = 90
+R= cv2.getRotationMatrix2D(center, angle, 1) #floating point shifting matrix
+#1 is the scale at which we rotate 
+M= np.float32([[1,0,150], [0,1,70]]) #floating point shifting matrix
+#150,70 is the value with which we shift 
+shifted = cv2.warpAffine (pic, M, (cols, rows))
+rotated = cv2.warpAffine (pic, R, (cols, rows))
+#shifRotate = cv2.warpAffine (pic, M+R, (cols, rows)) #to do both 
+#cv2.imshow('Shifted image', shifRotate) #to open a window original is the title of the window 
+cv2.imshow('Shifted image', shifted)
+cv2.imshow('Rotated image', rotated)
+cv2.waitKey(0) #it opens up a window until we close it 
+cv2.destroyAllWindows() #destory all python window after closing 
