@@ -1,0 +1,12 @@
+import numpy  #to help with multidimensional array within the picture 
+import cv2
+
+pic = cv2.imread ('wallpaper.jpg', 0) #to read a imaage and convert to grayscale
+
+thresHoldValue = 100 #minimum threshold value
+#0 black, 255 white
+(T_value, binary_threshold) = cv2.threshold(pic, thresHoldValue, 220, cv2.THRESH_BINARY)
+#Funtion Call 220= max threshold value Thresh_binary is a type of thresholding 
+cv2.imshow('Thresholded image', binary_threshold)
+cv2.waitKey(0) #it opens up a window until we close it 
+cv2.destroyAllWindows() #destory all python window after closing 
