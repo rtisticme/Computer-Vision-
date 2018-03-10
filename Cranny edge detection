@@ -1,0 +1,22 @@
+import numpy  #to help with multidimensional array within the picture 
+import cv2
+
+pic1 = cv2.imread ('dice.jpg', 0) #to read a imaage and convert to grayscale
+pic2 = cv2.imread ('potrait.jpg', 0) #to read a imaage and convert to grayscale
+
+
+thresholdval1 = 100
+thresholdval2 = 200
+canny1 = cv2.Canny(pic1, thresholdval1, thresholdval2)
+
+
+thresholdval1 = 50
+thresholdval2 = 100
+canny2 = cv2.Canny(pic2, thresholdval1, thresholdval2) 
+
+
+
+cv2.imshow('Dice image', canny1)
+cv2.imshow('Potrait image', canny2)
+cv2.waitKey(0) #it opens up a window until we close it 
+cv2.destroyAllWindows() #destory all python window after closing
