@@ -1,0 +1,36 @@
+import numpy  #to help with multidimensional array within the picture 
+import cv2
+
+pic = cv2.imread ('wallpaper.jpg', 0) #to read a imaage and convert to grayscale
+
+matrix = (7,7) #strength 
+
+blur = cv2.GaussianBlur(pic, matrix, 0) #to blur a image
+
+cv2.imshow('Blur image', blur)
+cv2.waitKey(0) #it opens up a window until we close it 
+cv2.destroyAllWindows() #destory all python window after closing
+
+#medain blur- it is used to remove noise from an image
+noise = cv2.imread ('noise.png', 0) #to read a imaage and convert to grayscale
+
+kernal = 5 #3x3 matrix
+
+median = cv2.medianBlur(noise, kernal)
+
+cv2.imshow('Blur image', median)
+cv2.waitKey(0) #it opens up a window until we close it 
+cv2.destroyAllWindows() #destory all python window after closing
+
+#bilateral Filtering not very good 
+
+dimpixel = 7 #take value from center of the image (7 pixels from center)
+color = 100 #we consider more color near the pixel 
+space = 100 #how far from the center pixel will we consider
+
+filtering = cv2.bilateralFilter (pic, dimpixel, color, space)
+cv2.imshow('Blur image', filtering)
+cv2.waitKey(0) #it opens up a window until we close it 
+cv2.destroyAllWindows() #destory all python window after closing
+
+
