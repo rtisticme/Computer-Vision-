@@ -1,0 +1,31 @@
+#Hand Recognition
+
+#Importing library
+import cv2
+
+#loading the cascade
+hand_cascade = cv2.CascadeClassifier('Hand.Cascade.1.xml')
+scale_factor_hand = 1.2
+#function for detection 
+def detect(gray, frame) :
+    hands = hand_cascade.detectMultiScale(gray, scale_factor_hand, 15)
+    #detect grayscale image using the cascade, scale it and look for 15 cascading
+    #features 
+    for (x, y, w, h) in hands: #loop value form faces to x,y,w,h
+        cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0), 4) #4=width of the box
+        #darw a rectangle foe the face starting at x, y and add to width and
+        #height value of the face 
+    return frame 
+
+#using the webcam 
+video_capture = cv2.VideoCapture(0)
+while True:
+    ret, frame = video_capture.read() #we capture a video
+    #ret=return 
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) #convert the frames to gray scale
+    canvas = detect(gray, frame) #send the grayscale frame to fuction 
+    cv2.imshow('Video' , canvas) #show the video 
+    if cv2.waitKey(1) & 0xFF == ord('q'): #open video until q is pressed 
+        break
+video_capture.release()
+cv2.destroyAllWindows()
