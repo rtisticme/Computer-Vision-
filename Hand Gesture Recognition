@@ -11,7 +11,7 @@ while(cap.isOpened()):
 
     # get hand data from the rectangle sub window on the screen
     cv2.rectangle(img, (320,320), (100,100), (0,255,0),0)
-                        
+                        #size     #location of box #color
     crop_img = img[100:320, 100:320] 
 
     # convert to grayscale
