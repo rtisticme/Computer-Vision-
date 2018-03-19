@@ -18,7 +18,7 @@ while(cap.isOpened()):
     grey = cv2.cvtColor(crop_img, cv2.COLOR_BGR2GRAY)
 
     # applying gaussian blur
-    value = (35, 35)
+    #value = (35, 35)
     
     #To remove noise
     kernal =9 #strength
